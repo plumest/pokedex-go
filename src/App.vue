@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Loading v-if="isLoading"/>
     <div class="container">
       <PokeList :pokemons="pokemons"/>
     </div>
@@ -8,30 +9,37 @@
 
 <script>
 import PokeList from "@/views/PokeList";
+import Loading from "@/components/Loading";
 
 export default {
   name: 'App',
   components: {
-    PokeList
+    PokeList,
+    Loading
   },
   computed: {
     pokemons() {
       return this.$store.state.pokemons
+    },
+    isLoading() {
+      return this.$store.state.isLoading
     }
   },
   async mounted() {
+    this.$store.dispatch('setLoading', true)
     await this.$store.dispatch('loadData')
+    this.$store.dispatch('setLoading', false)
   },
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+
+}
+
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
 }
 </style>
