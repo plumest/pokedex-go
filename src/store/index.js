@@ -7,16 +7,20 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        pokemons: []
+        pokemons: [],
+        isLoading: false
     },
     mutations: {
         setData(state, data) {
             state.pokemons = data
+        },
+        setLoading(state, value) {
+            state.isLoading = value
         }
     },
     actions: {
         async loadData(context) {
-            const resp = await fetch('http://localhost:3000/graphql', {
+            const response = await fetch('http://localhost:3000/graphql', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,10 +50,14 @@ export default new Vuex.Store({
                     }`
                 })
             });
-            const json = await resp.json();
+            const json = await response.json();
             const data = json.data.pokemons;
             context.commit('setData', data)
         },
+        setLoading(context, value) {
+            document.body.classList.toggle('stop-scrolling')
+            context.commit('setLoading', value)
+        }
     },
     modules: {
     }
