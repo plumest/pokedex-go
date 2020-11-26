@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// Get $route.params.id
     export default {
     name: "pokemon"
 }
