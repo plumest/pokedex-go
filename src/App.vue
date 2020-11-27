@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Loading v-if="isLoading"/>
-    <div class="container">
+    <div>
       <PokeList :pokemons="pokemons"/>
     </div>
   </div>
@@ -33,7 +33,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import './src/assets/scss/app.scss';
+
 #app {
 
 }
