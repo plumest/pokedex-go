@@ -1,107 +1,122 @@
 <template>
   <Page>
-    <Loading v-if="isLoading"/>
-    <template v-slot:section-header>
-      <h2>{{ pokemon.name }}</h2>
-    </template>
-    <template v-slot:section-content>
+    <Loading v-if="isLoading" />
+    <template v-slot:section-header v-if="!isLoading">
       <div class="container">
-        <div class="info">
-          <img :src="pokemon.image" />
-          <div class="container">
-            <div class="topic">
-              <h3>Information</h3>
-            </div>
-            <div class="row">
-              <div class="col-sm">
-                <div class="info-item">
-                  <div class="info-item-topic">Pokedex id</div>
-                  <div class="info-item-content">
-                    {{ pokemon.pokemonId }}
+        <div class="d-flex align-items-center">
+          <router-link to="/">
+            <i class="fas fa-backward"></i>
+          </router-link>
+          <h2 class="ml-2">{{ pokemon.name }}</h2>
+        </div>
+      </div>
+    </template>
+    <template v-slot:section-content v-if="!isLoading">
+      <div class="container">
+        <div class="info-layout">
+          <div class="info">
+            <img :src="pokemon.image" />
+            <div class="container info-background">
+              <div class="topic">
+                <h3>Information</h3>
+              </div>
+              <div class="row">
+                <div class="col-sm">
+                  <div class="info-item">
+                    <div class="info-item-topic">Pokedex id</div>
+                    <div class="info-item-content">
+                      {{ pokemon.pokemonId }}
+                    </div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-item-topic">Primary Type</div>
+                    <div class="info-item-content">
+                      {{ pokemon.primaryType }}
+                    </div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-item-topic">Attack</div>
+                    <div class="info-item-content">
+                      {{ pokemon.attack }}
+                    </div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-item-topic">Hp</div>
+                    <div class="info-item-content">
+                      {{ pokemon.hp }}
+                    </div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-item-topic">Legendary</div>
+                    <div class="info-item-content">
+                      {{ pokemon.legendary }}
+                    </div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-item-topic">Weight</div>
+                    <div class="info-item-content">
+                      {{ pokemon.weight }}
+                    </div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-item-topic">Capture rate</div>
+                    <div class="info-item-content">
+                      {{ pokemon.captureRate }}
+                    </div>
                   </div>
                 </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Primary Type</div>
-                  <div class="info-item-content">
-                    {{ pokemon.primaryType }}
+
+                <div class="col-sm">
+                  <div class="info-item">
+                    <div class="info-item-topic">Generation</div>
+                    <div class="info-item-content">
+                      {{ pokemon.generation }}
+                    </div>
                   </div>
-                </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Attack</div>
-                  <div class="info-item-content">
-                    {{ pokemon.attack }}
+                  <div class="info-item">
+                    <div class="info-item-topic">Secondary Type</div>
+                    <div class="info-item-content">
+                      {{ pokemon.secondaryType }}
+                    </div>
                   </div>
-                </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Hp</div>
-                  <div class="info-item-content">
-                    {{ pokemon.hp }}
+                  <div class="info-item">
+                    <div class="info-item-topic">Defense</div>
+                    <div class="info-item-content">
+                      {{ pokemon.defense }}
+                    </div>
                   </div>
-                </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Legendary</div>
-                  <div class="info-item-content">
-                    {{ pokemon.legendary }}
+                  <div class="info-item">
+                    <div class="info-item-topic">Stamina</div>
+                    <div class="info-item-content">
+                      {{ pokemon.stamina }}
+                    </div>
                   </div>
-                </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Weight</div>
-                  <div class="info-item-content">
-                    {{ pokemon.weight }}
+                  <div class="info-item">
+                    <div class="info-item-topic">Cp</div>
+                    <div class="info-item-content">
+                      {{ pokemon.cp }}
+                    </div>
                   </div>
-                </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Capture rate</div>
-                  <div class="info-item-content">
-                    {{ pokemon.captureRate }}
+                  <div class="info-item">
+                    <div class="info-item-topic">Height</div>
+                    <div class="info-item-content">
+                      {{ pokemon.height }}
+                    </div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-item-topic">Escape rate</div>
+                    <div class="info-item-content">
+                      {{ pokemon.escapeRate }}
+                    </div>
                   </div>
                 </div>
               </div>
-
-
-              <div class="col-sm">
-                <div class="info-item">
-                  <div class="info-item-topic">Generation</div>
-                  <div class="info-item-content">
-                    {{ pokemon.generation }}
-                  </div>
-                </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Secondary Type</div>
-                  <div class="info-item-content">
-                    {{ pokemon.secondaryType }}
-                  </div>
-                </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Defense</div>
-                  <div class="info-item-content">
-                    {{ pokemon.defense }}
-                  </div>
-                </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Stamina</div>
-                  <div class="info-item-content">
-                    {{ pokemon.stamina }}
-                  </div>
-                </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Cp</div>
-                  <div class="info-item-content">
-                    {{ pokemon.cp }}
-                  </div>
-                </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Height</div>
-                  <div class="info-item-content">
-                    {{ pokemon.height }}
-                  </div>
-                </div>
-                <div class="info-item">
-                  <div class="info-item-topic">Escape rate</div>
-                  <div class="info-item-content">
-                    {{ pokemon.escapeRate }}
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div class="stat mt-3">
+            <div class="container">
+              <div class="topic">
+                <h3>Statistics</h3>
               </div>
             </div>
           </div>
@@ -114,13 +129,13 @@
 <script>
 // Get $route.params.id
 import Page from '@/components/Page.vue';
-import Loading from "@/components/Loading";
+import Loading from '@/components/Loading';
 
 export default {
   name: 'pokemon',
   components: {
     Page,
-    Loading
+    Loading,
   },
   created() {
     this.loadPokemon(this.$route.params.pokemonId);
@@ -175,30 +190,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
 @import '~bootstrap/scss/bootstrap';
 
-.info {
+.info-layout {
   background-color: #b0413e;
   padding: 1rem;
-  display: flex;
-  font-size: $spacer;
-  justify-content: flex-start;
-  img {
-    display: block;
-    width: 50%;
-    height: 100%;
-  }
-  .information {
-    // margin-left: 1rem;
-    flex-grow: 1;
-    .info-container {
-      display: flex;
-      justify-content: space-around;
-      align-items: flex-start;
+  .info {
+    display: flex;
+    font-size: $spacer;
+    justify-content: flex-start;
+    img {
+      display: block;
+      width: 50%;
+      height: 100%;
+    }
+    .information {
+      // margin-left: 1rem;
+      flex-grow: 1;
+      .info-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+      }
     }
   }
 }
+
+.info-background {
+  background-color: #F5B041;
+  padding: 1rem 1rem;
+}
+
 .info-item-topic {
   text-decoration-line: underline;
+}
+
+.stat {
+  background-color: #CAA365;
 }
 </style>

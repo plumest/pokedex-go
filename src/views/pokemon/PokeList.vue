@@ -1,5 +1,6 @@
 <template>
   <Page>
+    <Loading v-if="!pokemons" />
     <template v-slot:section-header>
       <h2>Pokemon list</h2>
     </template>
@@ -14,7 +15,9 @@
           <div>{{ pokemon.pokemonId }}#</div>
           <div><img :src="pokemon.image" /></div>
           <div class="pokename">{{ pokemon.name }}</div>
-          <div class="pokeType">Type = {{ pokemon.primaryType }}, {{pokemon.secondaryType}}</div>
+          <div class="pokeType">
+            Type = {{ pokemon.primaryType }}, {{ pokemon.secondaryType }}
+          </div>
           <div class="pokeinfo">hp = {{ pokemon.hp }}</div>
           <div class="pokeinfo">atk = {{ pokemon.attack }}</div>
           <div class="pokeinfo">defense = {{ pokemon.defense }}</div>
@@ -27,10 +30,13 @@
 
 <script>
 import Page from '@/components/Page.vue';
+import Loading from '@/components/Loading';
+
 export default {
   name: 'pokemonList',
   components: {
     Page,
+    Loading,
   },
   computed: {
     pokemons() {
@@ -40,13 +46,15 @@ export default {
   methods: {
     seePokemon: function(id) {
       console.log(id);
-      this.$router.push(`/pokemon/${id}`)
+      this.$router.push(`/pokemon/${id}`);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@import '~bootstrap/scss/bootstrap';
+
 img {
   width: 60px;
   height: 100%;
@@ -69,5 +77,10 @@ img {
   .pokeinfo {
     width: 10%;
   }
+}
+
+.pokemon:hover {
+  background-color: $success;
+  cursor: pointer;
 }
 </style>
