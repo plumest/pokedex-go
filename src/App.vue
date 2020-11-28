@@ -38,8 +38,8 @@ export default {
 }
 
 body {
-  background-color: #fcaa67;
-  background-image: url('./assets/pokeball.png');
+  background-color: #333333;
+  color: #333333;
 }
 .stop-scrolling {
   height: 100%;

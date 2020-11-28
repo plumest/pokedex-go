@@ -1,6 +1,6 @@
 <template>
   <Page>
-    <Loading v-if="!pokemons" />
+    <Loading v-if="!pokemonList" />
     <template v-slot:section-header>
       <div class="d-flex align-items-baseline">
         <h2 class="topic-header">Pokemon list</h2>
@@ -16,25 +16,20 @@
         </router-link>
       </div>
     </template>
+
     <template v-slot:section-content>
-      <div class="poke-list" v-if="pokemons">
+      <div class="poke-list" v-if="pokemonList">
         <div
           class="pokemon"
-          v-for="pokemon in pokemons"
+          v-for="pokemon in pokemonList"
           :key="pokemon.pokemonId"
           @click="seePokemon(pokemon.pokemonId)"
+          :style="{ width: isDisplay(pokemon) ? '' : 0}"
         >
-          <div>{{ pokemon.pokemonId }}#</div>
-          <div><img :src="pokemon.image" /></div>
-          <div class="pokename">{{ pokemon.name }}</div>
-          <div class="pokeType">
-            Type = {{ pokemon.primaryType }},
-            {{ pokemon.secondaryType ? pokemon.secondaryType : '-' }}
-          </div>
-          <div class="pokeinfo">hp = {{ pokemon.hp }}</div>
-          <div class="pokeinfo">atk = {{ pokemon.attack }}</div>
-          <div class="pokeinfo">defense = {{ pokemon.defense }}</div>
-          <div class="pokeinfo ml-lg-5">cp = {{ pokemon.cp }}</div>
+          <Card
+            :pokemon="pokemon"
+            v-if="isDisplay(pokemon)"
+          />
         </div>
       </div>
     </template>
@@ -42,35 +37,16 @@
 </template>
 
 <script>
-//import _ from 'loadash';
 import Page from '@/components/Page.vue';
 import Loading from '@/components/Loading';
+import Card from "@/components/Card";
 
 export default {
   name: 'pokemonList',
   components: {
     Page,
     Loading,
-  },
-  computed: {
-    pokemonsStore() {
-      return this.$store.state.pokemons;
-    },
-    searchByName() {
-      return this.filter.name;
-    },
-  },
-  created() {
-    this.pokemons = this.pokemonsStore;
-  },
-  watch: {
-    searchByName() {
-      // if(!this.searchByName) {
-      //   this.pokemons = _.find(this.pokemons, (p)=>{
-      //     return p.name.includes(this.searchByName);
-      //   });
-      // }
-    },
+    Card,
   },
   data() {
     return {
@@ -78,14 +54,24 @@ export default {
         name: '',
         type: '',
       },
-      pokemons: null,
     };
+  },
+  computed: {
+    pokemonList() {
+      return this.$store.state.pokemons;
+    },
+    searchByName() {
+      return this.filter.name;
+    },
   },
   methods: {
     seePokemon: function(id) {
       console.log(id);
       this.$router.push(`/pokemon/${id}`);
     },
+    isDisplay(pokemon) {
+      return pokemon.name.toLowerCase().includes(this.filter.name.toLowerCase()) || !this.filter.name
+    }
   },
 };
 </script>
@@ -93,28 +79,26 @@ export default {
 <style lang="scss" scoped>
 @import '~bootstrap/scss/bootstrap';
 
+@keyframes snooze {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
 img {
   width: 60px;
   height: 100%;
 }
 
-.pokemon > div {
-  margin-right: 1rem;
-}
-.pokemon {
-  padding: 0.5 * $spacer 0;
-  // border: black 1px solid;
+.poke-list {
   display: flex;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 
-  .pokename {
-    width: 10%;
-  }
-  .pokeType {
-    width: 18%;
-  }
-  .pokeinfo {
-    width: 10%;
+  .pokemon {
+    width: 25%;
+    transition: 0.3s;
   }
 }
 
@@ -128,8 +112,10 @@ img {
 }
 
 .pokemon:hover {
-  background-color: $success;
   cursor: pointer;
+  animation: snooze;
+  animation-duration: 0.3s;
+  animation-iteration-count: 1;
 }
 
 .topic-header {

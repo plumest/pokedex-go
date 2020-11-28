@@ -4,15 +4,18 @@
     <div class="container">
       <div style="height:1rem"></div>
       <div class="project-name">
-        <h1>PMK Pokemon wiki</h1>
+        <h1>Pokédex GO</h1>
       </div>
-      <div class="background-2">
-        <div>
+      <div class="poke-container">
+
+        <div class="header-container">
           <slot name="section-header"></slot>
         </div>
-        <div class="content">
+
+        <div class="content-container">
           <slot name="section-content"></slot>
         </div>
+
       </div>
     </div>
   </div>
@@ -27,13 +30,24 @@ export default {
 .background-1-load{
   height: 100vh;
 }
-.background-2-load{
+
+.poke-container-load{
   height: 90vh;
 }
-.background-2 {
-  background-color: #ffffc7;
-  padding: 1rem;
+
+.poke-container {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 20px;
   height: 80%;
+
+  .header-container {
+    margin-bottom: 3rem;
+  }
+
+  .content-container {
+    position: relative;
+  }
 }
 
 .project-name {

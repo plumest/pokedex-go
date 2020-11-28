@@ -1,6 +1,7 @@
 <template>
   <Page>
     <Loading v-if="isLoading" />
+
     <template v-slot:section-header v-if="!isLoading">
       <div class="container">
         <div class="d-flex align-items-center">
@@ -11,6 +12,7 @@
         </div>
       </div>
     </template>
+
     <template v-slot:section-content v-if="!isLoading">
       <div class="container">
         <div class="info-layout">
@@ -113,6 +115,7 @@
               </div>
             </div>
           </div>
+
           <div class="stat mt-3">
             <div class="container">
               <div class="topic">
