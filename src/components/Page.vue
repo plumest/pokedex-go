@@ -1,5 +1,6 @@
 <template>
-  <div class="background-1">
+  <div>
+    <slot></slot>
     <div class="container">
       <div style="height:1rem"></div>
       <div class="project-name">
@@ -18,17 +19,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    route() {
+      return this.$route.params;
+    }
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-.background-1 {
-  background-color: #fcaa67;
-  background-image: url('../assets/pokeball.png');
+.background-1-load{
+  height: 100vh;
+}
+.background-2-load{
+  height: 90vh;
 }
 .background-2 {
   background-color: #ffffc7;
   padding: 1rem;
+  height: 80%;
   .topic-header{
     text-decoration: underline;
   }
@@ -39,6 +49,7 @@ export default {};
   background: wheat;
   width: 40vw;
   margin: 0 auto;
+  padding: 0.5rem;
   margin-bottom: 1rem;
 }
 </style>

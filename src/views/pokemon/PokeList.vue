@@ -4,19 +4,21 @@
       <h2>Pokemon list</h2>
     </template>
     <template v-slot:section-content>
-      <div class="poke-list">
+      <div class="poke-list" v-if="pokemons">
         <div
           class="pokemon"
           v-for="pokemon in pokemons"
           :key="pokemon.pokemonId"
+          @click="seePokemon(pokemon.pokemonId)"
         >
           <div>{{ pokemon.pokemonId }}#</div>
           <div><img :src="pokemon.image" /></div>
           <div class="pokename">{{ pokemon.name }}</div>
-          <div class="pokeType">Type = {{ pokemon.primaryType}}</div>
+          <div class="pokeType">Type = {{ pokemon.primaryType }}, {{pokemon.secondaryType}}</div>
           <div class="pokeinfo">hp = {{ pokemon.hp }}</div>
           <div class="pokeinfo">atk = {{ pokemon.attack }}</div>
           <div class="pokeinfo">defense = {{ pokemon.defense }}</div>
+          <div class="pokeinfo ml-lg-5">cp = {{ pokemon.cp }}</div>
         </div>
       </div>
     </template>
@@ -27,11 +29,19 @@
 import Page from '@/components/Page.vue';
 export default {
   name: 'pokemonList',
-  props: {
-    pokemons: Array,
-  },
   components: {
     Page,
+  },
+  computed: {
+    pokemons() {
+      return this.$store.state.pokemons;
+    },
+  },
+  methods: {
+    seePokemon: function(id) {
+      console.log(id);
+      this.$router.push(`/pokemon/${id}`)
+    },
   },
 };
 </script>
@@ -51,10 +61,10 @@ img {
   align-items: center;
 
   .pokename {
-    width:10%;
+    width: 10%;
   }
   .pokeType {
-    width: 18%
+    width: 18%;
   }
   .pokeinfo {
     width: 10%;

@@ -2,25 +2,22 @@
   <div id="app">
     <Loading v-if="isLoading"/>
     <div>
-      <PokeList :pokemons="pokemons"/>
+      <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
-import PokeList from "@/views/PokeList";
+// import PokeList from "@/views/PokeList";
 import Loading from "@/components/Loading";
 
 export default {
   name: 'App',
   components: {
-    PokeList,
+    // PokeList,
     Loading
   },
   computed: {
-    pokemons() {
-      return this.$store.state.pokemons
-    },
     isLoading() {
       return this.$store.state.isLoading
     }
@@ -40,6 +37,10 @@ export default {
 
 }
 
+body {
+  background-color: #fcaa67;
+  background-image: url('./assets/pokeball.png');
+}
 .stop-scrolling {
   height: 100%;
   overflow: hidden;

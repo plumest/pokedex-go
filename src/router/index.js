@@ -2,20 +2,29 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Pokemon from "@/views/pokemon/Pokemon";
-import PokeList from "@/views/PokeList";
+import PokeList from "@/views/pokemon/PokeList";
+import PageNotFound from "@/components/PageNotFound"
 
 Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/",
+      path: "/",
+      redirect: "pokemons",
+    },
+    {
+        path: "/pokemons",
         name: "pokemonList",
         component: PokeList,
     },
     {
-        path: "/pokemon/:pokemonID",
+        path: "/pokemon/:pokemonId",
         name: "pokemon",
         component: Pokemon
+    },
+    {
+      path: '*',
+      component: PageNotFound,
     },
 ];
 
