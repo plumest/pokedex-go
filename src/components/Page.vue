@@ -7,7 +7,7 @@
         <h1>PMK Pokemon wiki</h1>
       </div>
       <div class="background-2">
-        <div class="topic-header">
+        <div>
           <slot name="section-header"></slot>
         </div>
         <div class="content">
@@ -34,9 +34,6 @@ export default {
   background-color: #ffffc7;
   padding: 1rem;
   height: 80%;
-  .topic-header{
-    text-decoration: underline;
-  }
 }
 
 .project-name {

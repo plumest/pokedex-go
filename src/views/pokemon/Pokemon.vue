@@ -4,10 +4,10 @@
     <template v-slot:section-header v-if="!isLoading">
       <div class="container">
         <div class="d-flex align-items-center">
-          <router-link to="/">
-            <i class="fas fa-backward"></i>
+          <router-link class="back-button" to="/">
+            <i class="fas fa-caret-square-left"></i>
           </router-link>
-          <h2 class="ml-2">{{ pokemon.name }}</h2>
+          <h2 class="ml-2 topic-header">{{ pokemon.name }}</h2>
         </div>
       </div>
     </template>
@@ -76,7 +76,7 @@
                   <div class="info-item">
                     <div class="info-item-topic">Secondary Type</div>
                     <div class="info-item-content">
-                      {{ pokemon.secondaryType }}
+                      {{ pokemon.secondaryType ? pokemon.secondaryType: "-" }}
                     </div>
                   </div>
                   <div class="info-item">
@@ -190,7 +190,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
 @import '~bootstrap/scss/bootstrap';
 
 .info-layout {
@@ -217,8 +216,12 @@ export default {
   }
 }
 
+.back-button {
+  font-size: $font-size-lg;
+}
+
 .info-background {
-  background-color: #F5B041;
+  background-color: #f5b041;
   padding: 1rem 1rem;
 }
 
@@ -227,6 +230,9 @@ export default {
 }
 
 .stat {
-  background-color: #CAA365;
+  background-color: #caa365;
+}
+.topic-header {
+  text-decoration: underline;
 }
 </style>
