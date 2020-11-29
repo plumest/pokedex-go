@@ -8,7 +8,14 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         pokemons: [],
-        isLoading: false
+        isLoading: false,
+        filter: {
+          name: '',
+          type: '',
+          cp: 0,
+          generation: 0,
+          legendary: null
+        }
     },
     mutations: {
         setData(state, data) {
@@ -16,6 +23,9 @@ export default new Vuex.Store({
         },
         setLoading(state, value) {
             state.isLoading = value
+        },
+        setSearch(state, value) {
+            state.filter.name = value
         }
     },
     actions: {
@@ -57,6 +67,9 @@ export default new Vuex.Store({
         setLoading(context, value) {
             document.body.classList.toggle('stop-scrolling')
             context.commit('setLoading', value)
+        },
+        setSearch(context, value) {
+            context.commit('setSearch', value)
         }
     },
     modules: {

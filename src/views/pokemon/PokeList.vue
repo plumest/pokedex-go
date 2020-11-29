@@ -2,13 +2,13 @@
   <Page>
     <Loading v-if="!pokemonList" />
     <template v-slot:section-header>
-      <div class="d-flex align-items-baseline">
-        <h2 class="topic-header">Pokemon list</h2>
-        <div class="ml-3">
+      <div class="d-flex justify-content-center align-items-baseline">
+        <div class="">
           <input
-            class="form-control form-control-search"
-            placeholder="search by name"
+            class="filter-box form-control form-control-search"
+            placeholder="Enter pokemon name"
             v-model="filter.name"
+            @keyup.enter.prevent="handleSearch"
           />
         </div>
         <router-link class="report ml-5 h4" to="/report">
@@ -53,6 +53,9 @@ export default {
       filter: {
         name: '',
         type: '',
+        cp: 0,
+        generation: 0,
+        legendary: null
       },
     };
   },
@@ -63,6 +66,9 @@ export default {
     searchByName() {
       return this.filter.name;
     },
+    filterStore() {
+      return this.$store.state.filter
+    }
   },
   methods: {
     seePokemon: function(id) {
@@ -70,7 +76,10 @@ export default {
       this.$router.push(`/pokemon/${id}`);
     },
     isDisplay(pokemon) {
-      return pokemon.name.toLowerCase().includes(this.filter.name.toLowerCase()) || !this.filter.name
+      return pokemon.name.toLowerCase().includes(this.filterStore.name.toLowerCase()) || !this.filterStore.name
+    },
+    handleSearch() {
+      this.$store.dispatch('setSearch', this.filter.name)
     }
   },
 };
@@ -116,6 +125,12 @@ img {
   animation: snooze;
   animation-duration: 0.3s;
   animation-iteration-count: 1;
+}
+
+.filter-box {
+  &:focus {
+    box-shadow: none;
+  }
 }
 
 .topic-header {
