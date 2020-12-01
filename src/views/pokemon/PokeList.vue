@@ -3,17 +3,39 @@
     <Loading v-if="!pokemonList" />
     <template v-slot:section-header>
       <div class="d-flex justify-content-center align-items-baseline">
-        <div class="">
+
+        <div class="search-container">
+          <!--    Search Input    -->
           <input
-            class="filter-box form-control form-control-search"
+            class="search-box form-control form-control-search"
             placeholder="Enter pokemon name"
             v-model="filter.name"
-            @keyup.enter.prevent="handleSearch"
+            @keyup.enter.prevent="handleSearch($event)"
           />
+
+          <!--    Search Dropdown    -->
+          <div class="search-dropdown">
+            <div
+              class="search-content"
+              v-for="pokemon in pokemonList"
+              :key="pokemon.name"
+            >
+              <span
+                v-if="pokemon.name.toLowerCase().includes(filter.name.toLowerCase()) || !filter.name"
+                role="button"
+                @click.prevent="handleSearch($event)"
+              >{{ pokemon.name }}</span>
+            </div>
+          </div>
+
         </div>
         <router-link class="report ml-5 h4" to="/report">
           see report
         </router-link>
+        <span
+          role="button"
+          @click="handleSearch($event)"
+        >{{ 'Venusaur' }}</span>
       </div>
     </template>
 
@@ -78,8 +100,13 @@ export default {
     isDisplay(pokemon) {
       return pokemon.name.toLowerCase().includes(this.filterStore.name.toLowerCase()) || !this.filterStore.name
     },
-    handleSearch() {
-      this.$store.dispatch('setSearch', this.filter.name)
+    handleSearch(event) {
+      console.log(event)
+      if (event.type === 'keyup') {
+        this.$store.dispatch('setSearch', event.target.value)
+      } else {
+        this.$store.dispatch('setSearch', event.target.innerHTML)
+      }
     }
   },
 };
@@ -127,9 +154,55 @@ img {
   animation-iteration-count: 1;
 }
 
-.filter-box {
-  &:focus {
-    box-shadow: none;
+.search-container {
+  position: relative;
+
+  .search-box {
+    width: 100%;
+
+    &:focus {
+      box-shadow: none;
+
+      + .search-dropdown {
+        display: block;
+      }
+    }
+  }
+
+  .search-dropdown {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 100%;
+    max-height: 256px;
+    overflow-y: scroll;
+    top: 40px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+
+    .search-content {
+
+      span {
+        padding-left: 12px;
+        height: 32px;
+        line-height: 32px;
+      }
+
+      &:hover {
+        color: #ffffff;
+        cursor: pointer;
+        background-color: #b0413e;
+      }
+    }
+
+    .search-content-leave-active {
+
+      .span {
+        padding-left: 0;
+        height: 0;
+        line-height: 0;
+      }
+    }
   }
 }
 
