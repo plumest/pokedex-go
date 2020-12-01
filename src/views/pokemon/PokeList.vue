@@ -94,7 +94,6 @@ export default {
   },
   methods: {
     seePokemon: function(id) {
-      console.log(id);
       this.$router.push(`/pokemon/${id}`);
     },
     isDisplay(pokemon) {
