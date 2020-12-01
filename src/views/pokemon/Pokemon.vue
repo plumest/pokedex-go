@@ -12,7 +12,6 @@
         </div>
       </div>
     </template>
-
     <template v-slot:section-content v-if="!isLoading">
       <div class="container">
         <div class="info-layout">
@@ -67,7 +66,6 @@
                     </div>
                   </div>
                 </div>
-
                 <div class="col-sm">
                   <div class="info-item">
                     <div class="info-item-topic">Generation</div>
@@ -78,7 +76,7 @@
                   <div class="info-item">
                     <div class="info-item-topic">Secondary Type</div>
                     <div class="info-item-content">
-                      {{ pokemon.secondaryType ? pokemon.secondaryType: "-" }}
+                      {{ pokemon.secondaryType ? pokemon.secondaryType : '-' }}
                     </div>
                   </div>
                   <div class="info-item">
@@ -113,9 +111,39 @@
                   </div>
                 </div>
               </div>
+              <div class="egg-info">
+                <div class="egg topic">
+                <h3>Egg information</h3>
+                </div>
+                <div v-if="!egg" class="no-egg">none</div>
+              <div v-if="egg"  class="row">
+                <div class="col-sm">
+                  <div class="info-item">
+                    <div class="info-item-topic">Distance</div>
+                    <div class="info-item-content">
+                      {{ egg.distance }}
+                    </div>
+                  </div>
+                  <div class="info-item">
+                    <div class="info-item-topic">Max Cp</div>
+                    <div class="info-item-content">
+                      {{ egg.maxCp }}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm">
+                  <div class="info-item">
+                    <div class="info-item-topic">Min Cp</div>
+                    <div class="info-item-content">
+                      {{ egg.minCp }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+                </div>
             </div>
           </div>
-
           <div class="stat mt-3">
             <div class="container">
               <div class="topic">
@@ -147,6 +175,7 @@ export default {
     return {
       pokemon: null,
       isLoading: true,
+      egg: null,
     };
   },
   methods: {
@@ -178,16 +207,22 @@ export default {
                         secondaryType
                         stamina
                         weight
+                          egg{
+                             distance
+                             maxCp
+                             minCp
+                           }
                       }
                     }`,
         }),
       });
       const json = await response.json();
-      console.log(json);
       const data = json.data.pokemon;
       this.pokemon = data;
+      this.egg = this.pokemon.egg;
       this.isLoading = false;
     },
+    async loadPokemonEgg(id) {},
   },
 };
 </script>
@@ -234,6 +269,10 @@ export default {
 
 .stat {
   background-color: #caa365;
+}
+
+.egg {
+  margin-top: $spacer;
 }
 .topic-header {
   text-decoration: underline;
