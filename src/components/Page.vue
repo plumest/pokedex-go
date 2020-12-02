@@ -1,7 +1,17 @@
 <template>
   <div>
     <div class="poke-nav">
-      <h1>Pokédex GO</h1>
+      <div class="nav-brand">
+        <router-link class="nav-btn" to="/">
+          <p class="nav-logo">Pokédex GO</p>
+        </router-link>
+      </div>
+
+      <div class="nav-items">
+        <router-link class="nav-btn" to="/">
+          <p class="nav-item">Pokemon</p>
+        </router-link>
+      </div>
     </div>
 
     <div class="container">
@@ -46,13 +56,46 @@ export default {
 }
 
 .poke-nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
   color: #ffffff;
   background-color: #153e90;
   font-weight: bold;
   width: 100vw;
-  height: 60px;
-  line-height: 60px;
-  position: fixed;
+  height: 40px;
+  line-height: 40px;
+  margin-bottom: 1rem;
   z-index: 1000;
+
+  .nav-brand, .nav-items {
+    width: 50%;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    .nav-logo {
+      margin-left: 2rem;
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-item {
+      width: fit-content;
+      margin-left: auto;
+      margin-right: 1rem;
+    }
+  }
+}
+
+.nav-btn {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
 }
 </style>

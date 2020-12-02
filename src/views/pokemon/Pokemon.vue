@@ -5,9 +5,6 @@
     <template v-slot:section-header v-if="!isLoading">
       <div class="container pb-0">
         <div class="d-flex align-items-center">
-          <router-link class="back-button" to="/">
-            <i class="fas fa-caret-square-left"></i>
-          </router-link>
           <h1 class="poke-name">{{ pokemon.name }}</h1>
         </div>
       </div>
@@ -50,7 +47,6 @@
             <div class="advance-stat">
               <div class="cp-wrapper">
                 <p>Max CP</p>
-
                 <div class="progress">
                   <div
                     class="progress-bar"
@@ -59,11 +55,13 @@
                     :aria-valuenow="pokemon.cp / 4431 * 100"
                     aria-valuemin="0"
                     aria-valuemax="100"
-                  >{{ pokemon.cp }}</div>
+                  >
+                    <span class="progress-badge">{{ pokemon.cp }}</span>
+                  </div>
                 </div>
               </div>
 
-              <div class="weight-wrapper">
+              <div class="attack-wrapper">
                 <p>ATK</p>
                 <div class="progress">
                   <div
@@ -74,12 +72,12 @@
                     aria-valuemin="0"
                     aria-valuemax="100"
                   >
-                    <span>{{ pokemon.attack }}</span>
+                    <span class="progress-badge">{{ pokemon.attack }}</span>
                   </div>
                 </div>
               </div>
 
-              <div class="height-wrapper">
+              <div class="defense-wrapper">
                 <p>DEF</p>
                 <div class="progress">
                   <div
@@ -89,12 +87,12 @@
                     :aria-valuenow="pokemon.defense / 396 * 100"
                     aria-valuemin="0" aria-valuemax="100"
                   >
-                    <span>{{ pokemon.defense }}</span>
+                    <span class="progress-badge">{{ pokemon.defense }}</span>
                   </div>
                 </div>
               </div>
 
-              <div class="height-wrapper">
+              <div class="stamina-wrapper">
                 <p>STA</p>
                 <div class="progress">
                   <div
@@ -104,7 +102,7 @@
                     :aria-valuenow="pokemon.stamina / 496 * 100"
                     aria-valuemin="0" aria-valuemax="100"
                   >
-                    <span>{{ pokemon.stamina }}</span>
+                    <span class="progress-badge">{{ pokemon.stamina }}</span>
                   </div>
                 </div>
               </div>
@@ -116,7 +114,25 @@
           <!--    Pokemon Egg      -->
           <div class="poke-egg" v-if="!!egg">
             <h1>Pokemon Egg</h1>
+
+            <div class="standard-stat">
+              <div class="height-wrapper">
+                <span>{{ egg.distance }}</span>
+                <p>Distance</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ egg.minCp }}</span>
+                <p>Min CP</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ egg.maxCp }}</span>
+                <p>Max CP</p>
+              </div>
+            </div>
           </div>
+          <!--    Pokemon Egg      -->
 
         </div>
       </div>
@@ -220,9 +236,16 @@ export default {
   box-shadow: 0 0 5px #ddd;
 
   div {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+
     span + p {
       font-size: 0.8rem;
       color: #b1b1b1;
+    }
+
+    p {
+      margin-bottom: 0;
     }
   }
 
@@ -233,5 +256,29 @@ export default {
 
 .advance-stat {
   margin-bottom: 2rem;
+
+  div {
+
+    p {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      margin-bottom: 0;
+    }
+
+    .progress {
+      height: 1.8rem;
+
+      .progress-bar {
+        text-align: left;
+        text-indent: 2rem;
+        font-size: 1rem;
+
+        .progress-badge {
+          background-color: white!important;
+        }
+      }
+    }
+  }
 }
 </style>
