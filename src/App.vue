@@ -36,7 +36,7 @@ export default {
 }
 
 body {
-  background-color: #333333;
+  background-color: #efefef;
   color: #333333;
 }
 .stop-scrolling {
