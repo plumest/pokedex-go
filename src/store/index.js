@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         pokemons: [],
+        pokemonRanking: [],
         eggs: {
           km2: [],
           km5: [],
@@ -36,6 +37,9 @@ export default new Vuex.Store({
         setEggs(state, data) {
             let key = data[0].distance
             state.eggs[key] = data
+        },
+        setPokemonRanking(state, value) {
+            state.pokemonRanking = value
         }
     },
     actions: {
@@ -123,6 +127,41 @@ export default new Vuex.Store({
           const json = await response.json();
           const data = json.data.eggsDistance;
           context.commit('setEggs', data)
+        },
+        async loadPokemonRanking(context) {
+          const response = await fetch('http://localhost:3000/graphql', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+              query: `
+                      {
+                        pokewitheggranking {
+                          attack
+                          captureRate
+                          cp
+                          defense
+                          escapeRate
+                          generation
+                          height
+                          hp
+                          image
+                          legendary
+                          name
+                          pokemonId
+                          primaryType
+                          secondaryType
+                          stamina
+                          weight
+                        }
+                      }`
+            })
+          });
+          const json = await response.json();
+          const data = json.data.pokewitheggranking;
+          context.commit('setPokemonRanking', data)
         },
     },
     modules: {

@@ -2,6 +2,7 @@
   <transition name="poke-card-transition">
     <div class="poke-card">
       <div class="image-wrapper">
+        <slot name="badge"></slot>
         <img class="poke-image" :src="pokemon.image" />
       </div>
 

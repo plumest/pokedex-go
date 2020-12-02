@@ -8,6 +8,10 @@
       </div>
 
       <div class="nav-items">
+        <router-link class="nav-btn" to="/pokemons/ranking">
+          <p class="nav-item">Tier List</p>
+        </router-link>
+
         <router-link class="nav-btn" to="/">
           <p class="nav-item">Pokemon</p>
         </router-link>
