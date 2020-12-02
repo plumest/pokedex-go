@@ -1,11 +1,10 @@
 <template>
   <div>
-    <slot></slot>
+    <div class="poke-nav">
+      <h1>Pokédex GO</h1>
+    </div>
+
     <div class="container">
-      <div style="height:1rem"></div>
-      <div class="project-name">
-        <h1>Pokédex GO</h1>
-      </div>
       <div class="poke-container">
 
         <div class="header-container">
@@ -41,21 +40,19 @@ export default {
   border-radius: 20px;
   height: 80%;
 
-  .header-container {
-    margin-bottom: 3rem;
-  }
-
   .content-container {
     position: relative;
   }
 }
 
-.project-name {
-  text-align: center;
-  background: wheat;
-  width: 40vw;
-  margin: 0 auto;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
+.poke-nav {
+  color: #ffffff;
+  background-color: #153e90;
+  font-weight: bold;
+  width: 100vw;
+  height: 60px;
+  line-height: 60px;
+  position: fixed;
+  z-index: 1000;
 }
 </style>
