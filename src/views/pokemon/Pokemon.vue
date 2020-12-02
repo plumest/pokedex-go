@@ -134,6 +134,114 @@
           </div>
           <!--    Pokemon Egg      -->
 
+          <!--    Pokemon Type Match Up      -->
+          <div class="poke-egg" v-if="!!damageToType">
+            <h1 class="damage-header">Damage to Type</h1>
+
+            <div class="damage-types">
+              <div class="height-wrapper">
+                <span>{{ damageToType.normal.toFixed(2) }}</span>
+                <p>Normal</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.fire.toFixed(2) }}</span>
+                <p>Fire</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.water.toFixed(2) }}</span>
+                <p>Water</p>
+              </div>
+            </div>
+
+            <div class="damage-types">
+              <div class="height-wrapper">
+                <span>{{ damageToType.electric.toFixed(2) }}</span>
+                <p>Electric</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.grass.toFixed(2) }}</span>
+                <p>Grass</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.ice.toFixed(2) }}</span>
+                <p>Ice</p>
+              </div>
+            </div>
+
+            <div class="damage-types">
+              <div class="height-wrapper">
+                <span>{{ damageToType.fighting.toFixed(2) }}</span>
+                <p>Fighting</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.poison.toFixed(2) }}</span>
+                <p>Poison</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.ground.toFixed(2) }}</span>
+                <p>Ground</p>
+              </div>
+            </div>
+
+            <div class="damage-types">
+              <div class="height-wrapper">
+                <span>{{ damageToType.flying.toFixed(2) }}</span>
+                <p>Flying</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.psychic.toFixed(2) }}</span>
+                <p>Psychic</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.bug.toFixed(2) }}</span>
+                <p>Bug</p>
+              </div>
+            </div>
+
+            <div class="damage-types">
+              <div class="height-wrapper">
+                <span>{{ damageToType.rock.toFixed(2) }}</span>
+                <p>Rock</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.ghost.toFixed(2) }}</span>
+                <p>Ghost</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.dragon.toFixed(2) }}</span>
+                <p>Dragon</p>
+              </div>
+            </div>
+
+            <div class="damage-types">
+              <div class="height-wrapper">
+                <span>{{ damageToType.dark.toFixed(2) }}</span>
+                <p>Dark</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.steel.toFixed(2) }}</span>
+                <p>Steel</p>
+              </div>
+
+              <div class="height-wrapper">
+                <span>{{ damageToType.fairy.toFixed(2) }}</span>
+                <p>Fairy</p>
+              </div>
+            </div>
+          </div>
+          <!--    Pokemon Type Match Up      -->
+
         </div>
       </div>
     </template>
@@ -156,6 +264,7 @@ export default {
       pokemon: null,
       isLoading: true,
       egg: null,
+      damageToType: null
     };
   },
   async created() {
@@ -185,11 +294,31 @@ export default {
               secondaryType
               stamina
               weight
-                egg{
+                egg {
                    distance
                    maxCp
                    minCp
                  }
+                damageType {
+                   bug
+                   dark
+                   dragon
+                   electric
+                   fairy
+                   fighting
+                   fire
+                   flying
+                   ghost
+                   grass
+                   ground
+                   ice
+                   normal
+                   poison
+                   psychic
+                   rock
+                   steel
+                   water
+                }
             }
           }`,
       })
@@ -197,6 +326,7 @@ export default {
     const json = await response.json();
     this.pokemon = json.data.pokemon;
     this.egg = json.data.pokemon.egg;
+    this.damageToType = json.data.pokemon.damageType;
     this.isLoading = false;
   },
   methods: {
@@ -224,7 +354,7 @@ export default {
   }
 }
 
-.standard-stat {
+.standard-stat, .damage-types {
   display: grid;
   grid-template-columns: 33.33% 33.33% 33.33%;
   grid-template-rows: 100px;
@@ -280,5 +410,13 @@ export default {
       }
     }
   }
+}
+
+.damage-types {
+  margin: 0;
+}
+
+.damage-header {
+  margin-bottom: 1rem;
 }
 </style>
