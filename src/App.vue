@@ -8,13 +8,11 @@
 </template>
 
 <script>
-// import PokeList from "@/views/PokeList";
 import Loading from "@/components/Loading";
 
 export default {
   name: 'App',
   components: {
-    // PokeList,
     Loading
   },
   computed: {
@@ -23,9 +21,9 @@ export default {
     }
   },
   async mounted() {
-    this.$store.dispatch('setLoading', true)
+    await this.$store.dispatch('setLoading', true)
     await this.$store.dispatch('loadData')
-    this.$store.dispatch('setLoading', false)
+    await this.$store.dispatch('setLoading', false)
   },
 }
 </script>
