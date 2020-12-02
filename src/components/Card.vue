@@ -1,21 +1,25 @@
 <template>
   <transition name="poke-card-transition">
     <div class="poke-card">
-      <div><img :src="pokemon.image" /></div>
-      <div class="pokename">{{ pokemon.name }}</div>
-      <div>#{{ parseID(pokemon.pokemonId) }}</div>
-      <div class="pokeType">
-        <span>
-          {{ capitalize(pokemon.primaryType) }}
-        </span>
-        <span>
-          {{ pokemon.secondaryType ? capitalize(pokemon.secondaryType) : '' }}
-        </span>
+      <div class="image-wrapper">
+        <img class="poke-image" :src="pokemon.image" />
       </div>
-      <div class="pokeinfo">hp = {{ pokemon.hp }}</div>
-      <div class="pokeinfo">atk = {{ pokemon.attack }}</div>
-      <div class="pokeinfo">defense = {{ pokemon.defense }}</div>
-      <div class="pokeinfo">cp = {{ pokemon.cp }}</div>
+
+      <div class="content-wrapper">
+        <div class="poke-identity">
+          <span class="poke-name">{{ pokemon.name }}</span>
+          <span class="poke-id">#{{ parseID(pokemon.pokemonId) }}</span>
+        </div>
+        <div class="poke-type">
+          <span>
+            {{ capitalize(pokemon.primaryType) }}
+          </span>
+          <span>
+            {{ pokemon.secondaryType ? capitalize(pokemon.secondaryType) : '' }}
+          </span>
+        </div>
+      </div>
+
     </div>
   </transition>
 </template>
@@ -48,13 +52,52 @@ export default {
 
 .poke-card {
   background-color: #ffffff;
-  margin: 0 auto;
-  padding: 1rem;
+  margin: 1rem;
   width: 90%;
+  height: 250px;
+  border: 1px solid #f5f5f5;
+  box-shadow: 0 0 5px #ddd;
 
-  .pokename {
-    font-size: 1.2rem;
-    font-weight: 600;
+  .image-wrapper {
+    display: grid;
+    place-items: center;
+    height: 70%;
+    background-color: #f5f5f5;
+
+    .poke-image {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  .content-wrapper {
+    display: grid;
+    padding: 0.4rem;
+    height: 30%;
+
+    .poke-identity {
+      position: relative;
+      height: 2rem;
+
+      .poke-name {
+        position: absolute;
+        left: 0;
+        bottom: 20%;
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+        font-weight: 600;
+      }
+
+      .poke-id {
+        position: absolute;
+        right: 0;
+        bottom: 20%;
+        color: #b1b1b1;
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin-left: auto;
+      }
+    }
   }
 }
 </style>

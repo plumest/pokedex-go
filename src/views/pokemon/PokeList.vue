@@ -29,13 +29,6 @@
           </div>
 
         </div>
-        <router-link class="report ml-5 h4" to="/report">
-          see report
-        </router-link>
-<!--        <span-->
-<!--          role="button"-->
-<!--          @click="handleSearch($event)"-->
-<!--        >{{ 'Venusaur' }}</span>-->
       </div>
     </template>
 
