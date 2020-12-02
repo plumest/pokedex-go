@@ -152,7 +152,6 @@
             </div>
           </div>
         </div>
-      </div>
     </template>
   </Page>
 </template>
@@ -222,7 +221,9 @@ export default {
       this.egg = this.pokemon.egg;
       this.isLoading = false;
     },
-    async loadPokemonEgg(id) {},
+    async loadPokemonEgg(id) {
+      console.log(id)
+    },
   },
 };
 </script>
