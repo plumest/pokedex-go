@@ -1,10 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Pokemon from "@/views/pokemon/Pokemon";
-import PokeList from "@/views/pokemon/PokeList";
-import PageNotFound from "@/components/PageNotFound"
-import Report from "@/views/pokemon/Report";
+const Pokemon = () => import("@/views/pokemon/Pokemon");
+const PokeList = () => import("@/views/pokemon/PokeList");
+const PageNotFound = () => import("@/components/PageNotFound");
+const Report = () => import("@/views/pokemon/Report");
 
 Vue.use(VueRouter);
 
