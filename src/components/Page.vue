@@ -11,6 +11,10 @@
         <router-link class="nav-btn" to="/">
           <p class="nav-item">Pokemon</p>
         </router-link>
+
+        <router-link class="nav-btn" to="/eggs">
+          <p class="nav-item">Egg</p>
+        </router-link>
       </div>
     </div>
 
@@ -89,6 +93,11 @@ export default {
       margin-left: auto;
       margin-right: 1rem;
     }
+  }
+
+  .nav-items {
+    display: flex;
+    justify-content: flex-end;
   }
 }
 

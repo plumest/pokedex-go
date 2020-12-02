@@ -78,9 +78,6 @@ export default {
     pokemonList() {
       return this.$store.state.pokemons;
     },
-    searchByName() {
-      return this.filter.name;
-    },
     filterStore() {
       return this.$store.state.filter
     }

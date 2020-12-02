@@ -5,6 +5,7 @@ const Pokemon = () => import("@/views/pokemon/Pokemon");
 const PokeList = () => import("@/views/pokemon/PokeList");
 const PageNotFound = () => import("@/components/PageNotFound");
 const Report = () => import("@/views/pokemon/Report");
+const Eggs = () => import("@/views/egg/Eggs")
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,11 @@ const routes = [
         path: "/pokemon/:pokemonId",
         name: "pokemon",
         component: Pokemon
+    },
+    {
+      path: "/eggs",
+      name: "eggs",
+      component: Eggs,
     },
     {
       path: "/report",
