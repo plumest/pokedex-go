@@ -31,7 +31,7 @@
             <div class="standard-stat">
               <div class="type-wrapper">
                 <span>{{ capitalize(pokemon.primaryType) }} </span>
-                <span>{{ capitalize(pokemon.secondaryType) }}</span>
+                <span v-if="pokemon.secondaryType">{{ capitalize(pokemon.secondaryType) }}</span>
                 <p>Type</p>
               </div>
 
