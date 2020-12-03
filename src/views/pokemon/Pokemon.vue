@@ -26,8 +26,8 @@
             <!--      TYPE Weight Height      -->
             <div class="standard-stat">
               <div class="type-wrapper">
-                <span>{{ pokemon.primaryType }}</span>
-                <span>{{ pokemon.secondaryType }}</span>
+                <span>{{ capitalize(pokemon.primaryType) }} </span>
+                <span>{{ capitalize(pokemon.secondaryType) }}</span>
                 <p>Type</p>
               </div>
 
