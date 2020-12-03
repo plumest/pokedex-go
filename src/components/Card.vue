@@ -13,7 +13,7 @@
         </div>
         <div class="poke-type">
           <span>
-            {{ capitalize(pokemon.primaryType) }} 
+            {{ capitalize(pokemon.primaryType) }}
           </span>
           <span>
             {{ pokemon.secondaryType ? capitalize(pokemon.secondaryType) : '' }}

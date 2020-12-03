@@ -70,6 +70,7 @@ export default new Vuex.Store({
                         secondaryType
                         stamina
                         weight
+                        highImg
                       }
                     }`
                 })
@@ -119,6 +120,7 @@ export default new Vuex.Store({
                                   secondaryType
                                   stamina
                                   weight
+                                  highImg
                               }
                           }
                       }`
@@ -155,6 +157,7 @@ export default new Vuex.Store({
                           secondaryType
                           stamina
                           weight
+                          highImg
                         }
                       }`
             })

@@ -13,7 +13,11 @@
     <template v-slot:section-content v-if="!isLoading">
       <div class="pokemon-container">
         <div class="image-wrapper">
-          <img class="poke-image" :src="pokemon.image" :alt="pokemon.name">
+          <video width="320" height="240" autoplay muted loop v-if="pokemon.highImg">
+            <source :src="pokemon.highImg" type="video/mp4">
+            <img class="poke-image" :src="pokemon.image" :alt="pokemon.name">
+          </video>
+          <img class="poke-image" :src="pokemon.image" :alt="pokemon.name" v-else>
         </div>
 
         <div class="content-wrapper">
@@ -294,6 +298,7 @@ export default {
               secondaryType
               stamina
               weight
+              highImg
                 egg {
                    distance
                    maxCp
