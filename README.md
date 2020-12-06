@@ -1,5 +1,10 @@
 # pokemon-go
 
+## Acknowledgement
+
+Every Pokemon pictures in this project come from [gamepress](https://gamepress.gg/pokemongo/pokemon-list)
+and [db.pokemongohub](https://db.pokemongohub.net/)
+
 ## Project setup
 ```
 yarn install
