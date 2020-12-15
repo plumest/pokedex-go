@@ -3,20 +3,48 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-// const url = 'http://localhost:8080/'
-
 export default new Vuex.Store({
     state: {
-        pokemons: []
+        pokemons: [],
+        pokemonRanking: [],
+        eggs: {
+          km2: [],
+          km5: [],
+          km7: [],
+          km10: [],
+          ASkm5: [],
+          ASkm10: []
+        },
+        isLoading: false,
+        filter: {
+          name: '',
+          type: '',
+          cp: 0,
+          generation: 0,
+          legendary: null
+        }
     },
     mutations: {
         setData(state, data) {
             state.pokemons = data
+        },
+        setLoading(state, value) {
+            state.isLoading = value
+        },
+        setSearch(state, value) {
+            state.filter.name = value
+        },
+        setEggs(state, data) {
+            let key = data[0].distance
+            state.eggs[key] = data
+        },
+        setPokemonRanking(state, value) {
+            state.pokemonRanking = value
         }
     },
     actions: {
         async loadData(context) {
-            const resp = await fetch('http://localhost:3000/graphql', {
+            const response = await fetch('http://localhost:3000/graphql', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,13 +70,101 @@ export default new Vuex.Store({
                         secondaryType
                         stamina
                         weight
+                        highImg
                       }
                     }`
                 })
             });
-            const json = await resp.json();
+            const json = await response.json();
             const data = json.data.pokemons;
             context.commit('setData', data)
+        },
+        setLoading(context, value) {
+            document.body.classList.toggle('stop-scrolling')
+            context.commit('setLoading', value)
+        },
+        setSearch(context, value) {
+            context.commit('setSearch', value)
+        },
+        async loadEgg(context, distance) {
+          const response = await fetch('http://localhost:3000/graphql', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+              query: `
+                      {
+                          eggsDistance(distance: "${distance}") {
+                              distance
+                              maxCp
+                              minCp
+                              name
+                              pokemonId
+
+                              pokemon {
+                                  attack
+                                  captureRate
+                                  cp
+                                  defense
+                                  escapeRate
+                                  generation
+                                  height
+                                  hp
+                                  image
+                                  legendary
+                                  name
+                                  pokemonId
+                                  primaryType
+                                  secondaryType
+                                  stamina
+                                  weight
+                                  highImg
+                              }
+                          }
+                      }`
+            })
+          });
+          const json = await response.json();
+          const data = json.data.eggsDistance;
+          context.commit('setEggs', data)
+        },
+        async loadPokemonRanking(context) {
+          const response = await fetch('http://localhost:3000/graphql', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+              query: `
+                      {
+                        pokewitheggranking {
+                          attack
+                          captureRate
+                          cp
+                          defense
+                          escapeRate
+                          generation
+                          height
+                          hp
+                          image
+                          legendary
+                          name
+                          pokemonId
+                          primaryType
+                          secondaryType
+                          stamina
+                          weight
+                          highImg
+                        }
+                      }`
+            })
+          });
+          const json = await response.json();
+          const data = json.data.pokewitheggranking;
+          context.commit('setPokemonRanking', data)
         },
     },
     modules: {

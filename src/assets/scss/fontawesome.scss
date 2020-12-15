@@ -1,0 +1,11 @@
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts" !default;
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/brands.scss";
+@import "~@fortawesome/fontawesome-free/scss/regular.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+@import "~@fortawesome/fontawesome-free/scss/v4-shims.scss";
+
+.fa, .fas, .far, .fal, .fab {
+  // font-family: 'Font Awesome 5 Free' !important;
+  // font-weight: 900; /* Fix version 5.0.9 */
+}

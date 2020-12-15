@@ -1,21 +1,48 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Pokemon from "@/views/pokemon/Pokemon";
-import PokeList from "@/views/PokeList";
+const Pokemon = () => import("@/views/pokemon/Pokemon");
+const PokeList = () => import("@/views/pokemon/PokeList");
+const PageNotFound = () => import("@/components/PageNotFound");
+const Report = () => import("@/views/pokemon/Report");
+const Ranking = () => import("@/views/pokemon/Ranking");
+const Eggs = () => import("@/views/egg/Eggs")
 
 Vue.use(VueRouter);
 
 const routes = [
     {
-        path: "/",
+      path: "/",
+      redirect: "pokemons",
+    },
+    {
+        path: "/pokemons",
         name: "pokemonList",
         component: PokeList,
     },
     {
-        path: "/pokemon/:pokemonID",
+      path: "/pokemons/ranking",
+      name: "Ranking",
+      component: Ranking,
+    },
+    {
+        path: "/pokemon/:pokemonId",
         name: "pokemon",
         component: Pokemon
+    },
+    {
+      path: "/eggs",
+      name: "eggs",
+      component: Eggs,
+    },
+    {
+      path: "/report",
+      component: Report,
+    }
+    ,
+    {
+      path: '*',
+      component: PageNotFound,
     },
 ];
 
